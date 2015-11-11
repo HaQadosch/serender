@@ -18,6 +18,8 @@ Front-end frameworks generally rely on the hashchange event in the browser, that
 var express = require('express')
 var app = express()
 
+app.set('port', process.env.PORT || 3000)
+
 var routes = ['/', '/company', '/work', '/join', '/contact']
 
 // Serender must be used before the routes that
@@ -35,6 +37,8 @@ app.get('*', function(req, res, next) {
 // Server the cient-side app's static files (CSS, JS, Images...)
 // from the 'client/dist' folder
 app.use(express.static('client/dist'))
+
+app.listen(app.get('port'))
 ```
 
 Notice how I'm using ```router.use(express.static('client/dist'))``` after the routes! This will server our static assets (CSS, JS, Images...) but we don't want our **index.html** page to be served with them.
