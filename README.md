@@ -16,6 +16,8 @@ Front-end frameworks generally rely on the hashchange event in the browser, that
 ```javascript
 // app.js
 var express = require('express')
+var serender = require('serender')
+
 var app = express()
 
 app.set('port', process.env.PORT || 3000)
