@@ -11,7 +11,7 @@ $ npm install serender --save
 
 ### Usage
 
-Front-end frameworks generally rely on the hashchange event in the browser, that's why you always have a ```#``` in the url. If you managed to get rid of it, then you've definitely defined some routes in you Express app so your users won't see a not found error when they refresh the page:
+Front-end frameworks generally rely on the hashchange event in the browser, that's why you always have a ```#``` in the url. If you managed to get rid of it, then you've definitely defined some routes in your Express app so your users won't see a not found error when they refresh the page:
 
 ```javascript
 // app.js
