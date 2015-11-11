@@ -22,18 +22,21 @@ var app = express()
 
 app.set('port', process.env.PORT || 3000)
 
-var routes = ['/', '/company', '/work', '/join', '/contact']
-
 // Serender must be used before the routes that
 // we want to render on the server
-app.use(serender(app, { routes: routes }))
+app.get('/', serender)
+app.get('/', function(req, res) {
+  res.sendFile('index.html', { root: 'client/dist' })
+})
 
-app.get('*', function(req, res, next) {
-  if (routes.indexOf(req.path) > -1) {
-    res.sendFile('index.html', { root: 'client/dist' })
-  }
-  
-  else next()
+app.get('/company', serender)
+app.get('/company', function(req, res) {
+  res.sendFile('index.html', { root: 'client/dist' })
+})
+
+app.get('/work', serender)
+app.get('/work', function(req, res) {
+  res.sendFile('index.html', { root: 'client/dist' })
 })
 
 // Server the cient-side app's static files (CSS, JS, Images...)
