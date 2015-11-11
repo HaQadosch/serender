@@ -1,7 +1,9 @@
 Serender
 ========
 
-Serender is a tiny middleware for [Express](http://expressjs.com/) that takes care of rendering client-side apps on the server, making your content loads first before your JavaScript code takes over.
+Serender is a tiny middleware for [Express](http://expressjs.com/) that takes care of rendering client-side apps on the server, making your content load first before your JavaScript code takes over.
+
+Demo screencast: http://youtu.be/ZvpjkA7q7pM
 
 ### Installation
 
