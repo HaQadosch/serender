@@ -1,6 +1,6 @@
 {
   "name": "serender",
-  "version": "0.0.6",
+  "version": "0.1.0",
   "description": "Server side rendering Express middleware",
   "main": "serender.js",
   "scripts": {
