@@ -50,6 +50,6 @@ Notice how I'm using ```router.use(express.static('client/dist'))``` after the r
 
 ### Cookies
 
-Serender handles cookies very well! You're authenticated users will see the content they must see even if they disable JavaScript completely.
+Serender handles cookies very well! Your authenticated users will see the content they must see even if they disable JavaScript completely.
 
 That's it! You can now focus on building you client-side app without being worried about any SEO issues, or clients with no JS!
