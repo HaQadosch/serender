@@ -24,20 +24,15 @@ var app = express()
 
 app.set('port', process.env.PORT || 3000)
 
-// Serender must be used before the routes that
-// we want to render on the server
-app.get('/', serender)
-app.get('/', function(req, res) {
+app.get('/', serender, function(req, res) {
   res.sendFile('index.html', { root: 'client/dist' })
 })
 
-app.get('/company', serender)
-app.get('/company', function(req, res) {
+app.get('/company', serender, function(req, res) {
   res.sendFile('index.html', { root: 'client/dist' })
 })
 
-app.get('/work', serender)
-app.get('/work', function(req, res) {
+app.get('/work', serender, function(req, res) {
   res.sendFile('index.html', { root: 'client/dist' })
 })
 
