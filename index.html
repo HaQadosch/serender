@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>Serender by YoussefKababe</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Serender</h1>
+      <h2 class="project-tagline">Insanely fast server side rendering middleware for Express</h2>
+      <a href="https://github.com/YoussefKababe/serender" class="btn">View on GitHub</a>
+      <a href="https://github.com/YoussefKababe/serender/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/YoussefKababe/serender/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="serender" class="anchor" href="#serender" aria-hidden="true"><span class="octicon octicon-link"></span></a>Serender</h1>
+
+<p>Serender is a tiny middleware for <a href="http://expressjs.com/">Express</a> that takes care of rendering client-side apps on the server, making your content load first before your JavaScript code takes over.</p>
+
+<p><a href="https://www.npmjs.com/package/serender"><img src="https://img.shields.io/npm/v/serender.svg?style=flat-square" alt="Package Version"></a>
+<a href="https://www.npmjs.com/package/serender"><img src="https://img.shields.io/npm/dt/serender.svg?style=flat-square" alt="Package Downloads"></a>
+<a href="https://codeclimate.com/github/YoussefKababe/serender"><img src="https://img.shields.io/codeclimate/github/YoussefKababe/serender.svg?style=flat-square" alt="Code Climate"></a>
+<a href="https://david-dm.org/youssefkababe/serender"><img src="https://img.shields.io/david/youssefkababe/serender.svg?style=flat-square" alt="Dependencies Status"></a></p>
+
+<p>Demo screencast: <a href="http://youtu.be/ZvpjkA7q7pM">http://youtu.be/ZvpjkA7q7pM</a></p>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h3>
+
+<pre><code>$ npm install serender --save
+</code></pre>
+
+<h3>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h3>
+
+<p>Front-end frameworks generally rely on the hashchange event in the browser, that's why you always have a <code>#</code> in the url. If you managed to get rid of it, then you've definitely defined some routes in your Express app so your users won't see a not found error when they refresh the page:</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c">// app.js</span>
+<span class="pl-k">var</span> express <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>express<span class="pl-pds">'</span></span>)
+<span class="pl-k">var</span> serender <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>serender<span class="pl-pds">'</span></span>)
+
+<span class="pl-k">var</span> app <span class="pl-k">=</span> express()
+
+app.set(<span class="pl-s"><span class="pl-pds">'</span>port<span class="pl-pds">'</span></span>, <span class="pl-c1">process</span>.env.PORT <span class="pl-k">||</span> <span class="pl-c1">3000</span>)
+
+app.get(<span class="pl-s"><span class="pl-pds">'</span>/<span class="pl-pds">'</span></span>, serender, <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+  res.sendFile(<span class="pl-s"><span class="pl-pds">'</span>index.html<span class="pl-pds">'</span></span>, { root<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>client/dist<span class="pl-pds">'</span></span> })
+})
+
+app.get(<span class="pl-s"><span class="pl-pds">'</span>/company<span class="pl-pds">'</span></span>, serender, <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+  res.sendFile(<span class="pl-s"><span class="pl-pds">'</span>index.html<span class="pl-pds">'</span></span>, { root<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>client/dist<span class="pl-pds">'</span></span> })
+})
+
+app.get(<span class="pl-s"><span class="pl-pds">'</span>/work<span class="pl-pds">'</span></span>, serender, <span class="pl-k">function</span>(<span class="pl-smi">req</span>, <span class="pl-smi">res</span>) {
+  res.sendFile(<span class="pl-s"><span class="pl-pds">'</span>index.html<span class="pl-pds">'</span></span>, { root<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>client/dist<span class="pl-pds">'</span></span> })
+})
+
+<span class="pl-c">// Server the cient-side app's static files (CSS, JS, Images...)</span>
+<span class="pl-c">// from the 'client/dist' folder</span>
+app.use(express.static(<span class="pl-s"><span class="pl-pds">'</span>client/dist<span class="pl-pds">'</span></span>))
+
+app.listen(app.get(<span class="pl-s"><span class="pl-pds">'</span>port<span class="pl-pds">'</span></span>))</pre></div>
+
+<p>Notice how I'm using <code>router.use(express.static('client/dist'))</code> after the routes! This will server our static assets (CSS, JS, Images...) but we don't want our <strong>index.html</strong> page to be served with them.</p>
+
+<h3>
+<a id="cookies" class="anchor" href="#cookies" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cookies</h3>
+
+<p>Serender handles cookies very well! Your authenticated users will see the content they must see even if they disable JavaScript completely.</p>
+
+<p>That's it! You can now focus on building you client-side app without being worried about any SEO issues, or clients with no JS!</p>
+
+<h3>
+<a id="how-does-it-work" class="anchor" href="#how-does-it-work" aria-hidden="true"><span class="octicon octicon-link"></span></a>How does it work?</h3>
+
+<p>Serender uses <a href="http://zombie.js.org/">Zombie</a> under the hood, which is a headless simulated browser for testing client side code.</p>
+
+<p>When you use it as the first middleware for your routes, Serender spins up a new Zombie (browser) instance for each new request, and makes it load the same exact page that the user is asking for. This might look like creating an infinit loop, but Serender adds a value to the browser headers making it skip itself and pass the new request to the next middleware.</p>
+
+<p>Zombie then loads the page, fetches all the assets, and runs the JavaScript code wich will then take care of fetching data from you API and rendering the page.</p>
+
+<p>As soon as Zombie finishes loading the page, Serender will take the final HTML output and send it back to the user.</p>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/YoussefKababe/serender">Serender</a> is maintained by <a href="https://github.com/YoussefKababe">YoussefKababe</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+            <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-36442752-7");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
