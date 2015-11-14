@@ -82,11 +82,18 @@ app.listen(app.get(<span class="pl-s"><span class="pl-pds">'</span>port<span cla
 
 <p>Serender uses <a href="http://zombie.js.org/">Zombie</a> under the hood, which is a headless simulated browser for testing client side code.</p>
 
-<p>When you use it as the first middleware for your routes, Serender spins up a new Zombie (browser) instance for each new request, and makes it load the same exact page that the user is asking for. This might look like creating an infinit loop, but Serender adds a value to the browser headers making it skip itself and pass the new request to the next middleware.</p>
+<p>When you use it as the first middleware for your routes, Serender creates a new Zombie (browser) instance for each new request, and makes it load the same exact page that the user is asking for. This might look like creating an infinit loop, but Serender adds a value to the browser headers making it skip itself and pass the new request to the next middleware.</p>
 
 <p>Zombie then loads the page, fetches all the assets, and runs the JavaScript code wich will then take care of fetching data from you API and rendering the page.</p>
 
 <p>As soon as Zombie finishes loading the page, Serender will take the final HTML output and send it back to the user.</p>
+
+<h3>
+<a id="upcoming-features" class="anchor" href="#upcoming-features" aria-hidden="true"><span class="octicon octicon-link"></span></a>Upcoming features</h3>
+
+<ul>
+<li>Although Serender is pretty fast and page rendering on the server takes no more than a few milliseconds, some developers may like to have an option to render their pages on the server only when a search engine or a social network scraper is requesting the page.</li>
+</ul>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/YoussefKababe/serender">Serender</a> is maintained by <a href="https://github.com/YoussefKababe">YoussefKababe</a>.</span>
