@@ -60,8 +60,12 @@ That's it! You can now focus on building you client-side app without being worri
 
 Serender uses [Zombie](http://zombie.js.org/) under the hood, which is a headless simulated browser for testing client side code.
 
-When you use it as the first middleware for your routes, Serender spins up a new Zombie (browser) instance for each new request, and makes it load the same exact page that the user is asking for. This might look like creating an infinit loop, but Serender adds a value to the browser headers making it skip itself and pass the new request to the next middleware.
+When you use it as the first middleware for your routes, Serender creates a new Zombie (browser) instance for each new request, and makes it load the same exact page that the user is asking for. This might look like creating an infinit loop, but Serender adds a value to the browser headers making it skip itself and pass the new request to the next middleware.
 
 Zombie then loads the page, fetches all the assets, and runs the JavaScript code wich will then take care of fetching data from you API and rendering the page.
 
 As soon as Zombie finishes loading the page, Serender will take the final HTML output and send it back to the user.
+
+### Upcoming features
+
+- Although Serender is pretty fast and page rendering on the server takes no more than a few milliseconds, some developers may like to have an option to render their pages on the server only when a search engine or a social network scraper is requesting the page.
